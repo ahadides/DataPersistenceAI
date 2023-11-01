@@ -26,13 +26,27 @@ class DatabaseActivity : AppCompatActivity() {
 
         binding.readData.setOnClickListener { readData() }
         binding.writeData.setOnClickListener { writeData() }
+        binding.button2.setOnClickListener { readFromInternalFile() }
 
+
+    }
+    private fun readFromInternalFile() {
+        val inputStream = openFileInput("myfile")
+        val reader = inputStream.bufferedReader()
+        val stringBuilder = StringBuilder()
+        val lineSeparator = System.getProperty("line.separator")
+
+        // Append each task to stringBuilder
+        reader.forEachLine { stringBuilder.append(it).append(lineSeparator) }
+        dbHelper.addUser(User("From File: ",stringBuilder.toString()))
 
     }
 
     private fun writeData() {
-        dbHelper.addUser(User("Course "+Random.nextInt(6000),
-            "CSC "+Random.nextInt(6000)))
+        var fistname = binding.firstNameEditText.text.toString()
+        var lastname = binding.lastNameEditText.text.toString()
+
+        dbHelper.addUser(User(fistname,lastname))
 
     }
 

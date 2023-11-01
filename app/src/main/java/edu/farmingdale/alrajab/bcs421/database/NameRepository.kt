@@ -7,7 +7,7 @@ class NameRepository private constructor(context: Context) {
     private val database : AppDatabase = Room.databaseBuilder(
         context.applicationContext,
         AppDatabase::class.java,
-        "person.db"
+        "person1.db"
     )
         .allowMainThreadQueries()
         .build()
